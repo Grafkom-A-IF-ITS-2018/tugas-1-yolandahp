@@ -113,24 +113,13 @@
                 lVertexPositionBuffer = gl.createBuffer()
                 gl.bindBuffer(gl.ARRAY_BUFFER, lVertexPositionBuffer)
 
-                // var vertices = [
-                //     -0.8, 1.2, 0.0,
-                //     -0.4, 1.2, 0.0,
-                //     -0.8, -1.2, 0.0,
-                //     -0.4, -1.2, 0.0, 
-
-                //     -0.4, -0.8, 0.0,
-                //     0.8, -0.8, 0.0,
-                //     -0.4, -1.2, 0.0,
-                //     0.8, -1.2, 0.0,
-                // ]
-
                 var vertices = []
-                
                 
                 for (var i = 0; i < 6; i++){
                     vertices = vertices.concat([
                         -0.8, 1.2 - i*0.4, 0.0,
+                        -0.4, 1.2 - i*0.4, 0.0,
+                        -0.8, 0.8 - i*0.4, 0.0,
                         -0.4, 1.2 - i*0.4, 0.0,
                         -0.8, 0.8 - i*0.4, 0.0,
                         -0.4, 0.8 - i*0.4, 0.0,
@@ -142,147 +131,297 @@
                         -0.4 + i*0.4, -0.8, 0.0,
                         -0.4 + i*0.4, -1.2, 0.0,
                         0.0 + i*0.4, -0.8, 0.0,
+                        -0.4 + i*0.4, -1.2, 0.0,
+                        0.0 + i*0.4, -0.8, 0.0,
                         0.0 + i*0.4, -1.2, 0.0,  
                     ])
                 }
 
+                for (var i = 0; i < 6; i++){
+                    vertices = vertices.concat([
+                        -0.8, 1.2 - i*0.4, -0.3,
+                        -0.4, 1.2 - i*0.4, -0.3,
+                        -0.8, 0.8 - i*0.4, -0.3,
+                        -0.4, 1.2 - i*0.4, -0.3,
+                        -0.8, 0.8 - i*0.4, -0.3,
+                        -0.4, 0.8 - i*0.4, -0.3,
+                    ])
+                }
+
+                for (var i = 0; i < 3; i++){
+                    vertices = vertices.concat([
+                        -0.4 + i*0.4, -0.8, -0.3,
+                        -0.4 + i*0.4, -1.2, -0.3,
+                        0.0 + i*0.4, -0.8, -0.3,
+                        -0.4 + i*0.4, -1.2, -0.3,
+                        0.0 + i*0.4, -0.8, -0.3,
+                        0.0 + i*0.4, -1.2, -0.3,  
+                    ])
+                }
+                
+                vertices = vertices.concat([
+                    //atas
+                    -0.8, 1.2, 0.0,
+                    -0.8, 1.2, -0.3,
+                    -0.4, 1.2, 0.0,
+                    -0.8, 1.2, -0.3,
+                    -0.4, 1.2, 0.0,
+                    -0.4, 1.2, -0.3,
+
+                    //tengah
+                    -0.4, -0.8, 0.0,
+                    -0.4, -0.8, -0.3,
+                    0.8, -0.8, 0.0,
+                    -0.4, -0.8, -0.3,
+                    0.8, -0.8, 0.0,
+                    0.8, -0.8, -0.3,
+
+                    //bawah
+                    -0.8, -1.2, 0.0,
+                    -0.8, -1.2, -0.3,
+                    0.8, -1.2, 0.0,
+                    -0.8, -1.2, -0.3,
+                    0.8, -1.2, 0.0,
+                    0.8, -1.2, -0.3,
+
+                    //tegak
+                    -0.8, 1.2, 0.0,
+                    -0.8, 1.2, -0.3,
+                    -0.8, -1.2, 0.0,
+                    -0.8, 1.2, -0.3,
+                    -0.8, -1.2, 0.0,
+                    -0.8, -1.2, -0.3,
+                    
+                    -0.4, 1.2, 0.0,
+                    -0.4, 1.2, -0.3,
+                    -0.4, -0.8, 0.0,
+                    -0.4, 1.2, -0.3,
+                    -0.4, -0.8, 0.0,
+                    -0.4, -0.8, -0.3,
+
+                    0.8, -0.8, 0.0,
+                    0.8, -0.8, -0.3,
+                    0.8, -1.2, 0.0,
+                    0.8, -0.8, -0.3,
+                    0.8, -1.2, 0.0,
+                    0.8, -1.2, -0.3,                    
+                ])
+
                 gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW)
                 lVertexPositionBuffer.itemSize = 3
-                lVertexPositionBuffer.numItems = 36
+                lVertexPositionBuffer.numItems = vertices.length/3
 
                 //letter L color
                 lVertexColorBuffer = gl.createBuffer()
                 gl.bindBuffer(gl.ARRAY_BUFFER, lVertexColorBuffer)
                 
-                var merah = [1.0, 0.0, 0.0, 1.0,
-                    1.0, 0.0, 0.0, 1.0,]
-                var kuning = [1.0, 1.0, 0.0, 1.0,
-                    1.0, 1.0, 0.0, 1.0,]
-                var hijau = [0.0, 1.0, 0.0, 1.0,
-                    0.0, 1.0, 0.0, 1.0,]
-                var biru = [0.0, 0.0, 1.0, 1.0,
-                    0.0, 0.0, 1.0, 1.0,]
-                var ungu = [1.0, 0.0, 1.0, 1.0,
-                    1.0, 0.0, 1.0, 1.0,]
+                var c1 = [1.0, 0.702, 0.8, 1.0,]
+                var c2 = [1.0, 1.0, 0.8, 1.0,]
+                var c3 = [0.949, 1.0, 0.212, 1.0,]
+                var c4 = [0.8, 0.831, 1.0, 1.0,]
+                var c5 = [1.0, 0.8, 0.8, 1.0,]
+                var c6 = [0.902, 0.8, 1.0, 1.0,]
+
+                var c = [c1, c2, c3, c4, c5, c6]
                 
                 var colors = []
-                colors = colors.concat(merah)
-                colors = colors.concat(kuning)
-                colors = colors.concat(kuning)
-                colors = colors.concat(hijau)
-                colors = colors.concat(hijau)
-                colors = colors.concat(biru)
-                colors = colors.concat(biru)
-                colors = colors.concat(ungu)
-                colors = colors.concat(ungu)
-                colors = colors.concat(ungu)
-                colors = colors.concat(ungu)
-                colors = colors.concat(biru)
-                colors = colors.concat(biru)
-                colors = colors.concat(hijau)
-                colors = colors.concat(hijau)
-                colors = colors.concat(kuning)
-                colors = colors.concat(kuning)
-                colors = colors.concat(merah)
+                for (var i = 0; i < 108; i++){
+                    colors = colors.concat(c[Math.floor((Math.random() * 10)) %6])
+                }
 
-                
-                // for (var i = 0; i < 36; i++){
-                //     colors = colors.concat([0.5, 0.5, 1.0, 1.0])
-                // }
-                
+                for (var i = 0; i < 36; i++){
+                    colors = colors.concat(c[0])
+                }
 
                 gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(colors), gl.STATIC_DRAW)
                 lVertexColorBuffer.itemSize = 4
-                lVertexColorBuffer.numItems = 36
+                lVertexColorBuffer.numItems = colors.length/4
 
                  //letter N position
                 nVertexPositionBuffer = gl.createBuffer()
                 gl.bindBuffer(gl.ARRAY_BUFFER, nVertexPositionBuffer)
-                // vertices = [
-                //     -0.8, 1.2, 0.0,
-                //     -0.4, 1.2, 0.0,
-                //     -0.8, -1.2, 0.0,
-                //     -0.4, -1.2, 0.0,
+                vertices = [
+                    //depan
+                    -0.8, 1.2, 0.0,
+                    -0.4, 1.2, 0.0,
+                    -0.8, -1.2, 0.0,
+                    -0.4, 1.2, 0.0,
+                    -0.8, -1.2, 0.0,
+                    -0.4, -1.2, 0.0,
 
-                //     -0.4, 1.2, 0.0,
-                //     -0.4, 0.28, 0.0,
-                //     0.4, -0.28, 0.0,
-                //     0.4, -1.2, 0.0,
-
-                //     0.4, 1.2, 0.0,
-                //     0.8, 1.2, 0.0,
-                //     0.4, -1.2, 0.0,
-                //     0.8, -1.2, 0.0
-                // ]
-
-                vertices = []
-
-                for (var i = 0; i < 6; i++){
-                    vertices = vertices.concat([
-                        -0.8, 1.2 - i*0.4, 0.0,
-                        -0.4, 1.2 - i*0.4, 0.0,
-                        -0.8, 0.8 - i*0.4, 0.0,
-                        -0.4, 0.8 - i*0.4, 0.0,
-                    ])
-                }
-
-                vertices = vertices.concat([
                     -0.4, 1.2, 0.0,
                     -0.4, 0.28, 0.0,
                     0.4, -0.28, 0.0,
+                    -0.4, 0.28, 0.0,
+                    0.4, -0.28, 0.0,
                     0.4, -1.2, 0.0,
-                ])
 
-                for (var i = 0; i < 6; i++){
-                    vertices = vertices.concat([
-                        0.4, 1.2 - i*0.4, 0.0,
-                        0.4, 0.8 - i*0.4, 0.0,
-                        0.8, 1.2 - i*0.4, 0.0,
-                        0.8, 0.8 - i*0.4, 0.0,
-                    ])
-                }
+                    0.4, 1.2, 0.0,
+                    0.8, 1.2, 0.0,
+                    0.4, -1.2, 0.0,
+                    0.8, 1.2, 0.0,
+                    0.4, -1.2, 0.0,
+                    0.8, -1.2, 0.0,
+
+                    //belakang
+                    -0.8, 1.2, -0.3,
+                    -0.4, 1.2, -0.3,
+                    -0.8, -1.2, -0.3,
+                    -0.4, 1.2, -0.3,
+                    -0.8, -1.2, -0.3,
+                    -0.4, -1.2, -0.3,
+
+                    -0.4, 1.2, -0.3,
+                    -0.4, 0.28, -0.3,
+                    0.4, -0.28, -0.3,
+                    -0.4, 0.28, -0.3,
+                    0.4, -0.28, -0.3,
+                    0.4, -1.2, -0.3,
+
+                    0.4, 1.2, -0.3,
+                    0.8, 1.2, -0.3,
+                    0.4, -1.2, -0.3,
+                    0.8, 1.2, -0.3,
+                    0.4, -1.2, -0.3,
+                    0.8, -1.2, -0.3,
+
+                    //atas
+                    -0.8, 1.2, 0.0,
+                    -0.4, 1.2, 0.0,
+                    -0.8, 1.2, -0.3,
+                    -0.4, 1.2, 0.0,
+                    -0.8, 1.2, -0.3,
+                    -0.4, 1.2, -0.3,
+
+                    0.4, 1.2, 0.0,
+                    0.8, 1.2, 0.0,
+                    0.4, 1.2, -0.3,
+                    0.8, 1.2, 0.0,
+                    0.4, 1.2, -0.3,
+                    0.8, 1.2, -0.3,
+
+                    //bawah
+                    -0.8, -1.2, 0.0,
+                    -0.4, -1.2, 0.0,
+                    -0.8, -1.2, -0.3,
+                    -0.4, -1.2, 0.0,
+                    -0.8, -1.2, -0.3,
+                    -0.4, -1.2, -0.3,
+
+                    0.4, -1.2, 0.0,
+                    0.8, -1.2, 0.0,
+                    0.4, -1.2, -0.3,
+                    0.8, -1.2, 0.0,
+                    0.4, -1.2, -0.3,
+                    0.8, -1.2, -0.3,
+                
+                    //sisi miring
+                    -0.4, 1.2, 0.0,
+                    -0.4, 1.2, -0.3,
+                    0.4, -0.28, 0.0,
+                    -0.4, 1.2, -0.3,
+                    0.4, -0.28, 0.0,
+                    0.4, -0.28, -0.3,
+
+                    -0.4, 0.28, 0.0,
+                    -0.4, 0.28, -0.3,
+                    0.4, -1.2, 0.0,
+                    -0.4, 0.28, -0.3,
+                    0.4, -1.2, 0.0,
+                    0.4, -1.2, -0.3,
+
+                    //sisi tegak
+                    -0.8, 1.2, 0.0,
+                    -0.8, 1.2, -0.3,
+                    -0.8, -1.2, 0.0,
+                    -0.8, 1.2, -0.3,
+                    -0.8, -1.2, 0.0,
+                    -0.8, -1.2, -0.3,
+
+                    -0.4, 1.2, 0.0,
+                    -0.4, 1.2, -0.3,
+                    -0.4, -1.2, 0.0,
+                    -0.4, 1.2, -0.3,
+                    -0.4, -1.2, 0.0,
+                    -0.4, -1.2, -0.3,
+
+                    0.4, 1.2, 0.0,
+                    0.4, 1.2, -0.3,
+                    0.4, -1.2, 0.0,
+                    0.4, 1.2, -0.3,
+                    0.4, -1.2, 0.0,
+                    0.4, -1.2, -0.3,
+
+                    0.8, 1.2, 0.0,
+                    0.8, 1.2, -0.3,
+                    0.8, -1.2, 0.0,
+                    0.8, 1.2, -0.3,
+                    0.8, -1.2, 0.0,
+                    0.8, -1.2, -0.3,
+                ]
 
                 gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW)
                 nVertexPositionBuffer.itemSize = 3
-                nVertexPositionBuffer.numItems = 52
+                nVertexPositionBuffer.numItems = vertices.length/3
 
                 //letter N color
                 nVertexColorBuffer = gl.createBuffer()
                 gl.bindBuffer(gl.ARRAY_BUFFER, nVertexColorBuffer)
-                colors = []
-                
-                for (var i = 0; i < 6; i++){
-                    colors = colors.concat([
-                        1.0, 0.2 + i*0.102, 0.2 + i*0.102, 1.0,
-                        1.0, 0.2 + i*0.102, 0.2 + i*0.102, 1.0,
+                colors = [
+                    //depan
+                    1.0, 0.2, 0.2, 1.0,
+                    1.0, 0.2, 0.2, 1.0,
+                    1.0, 0.812, 0.812, 1.0,
+                    1.0, 0.2, 0.2, 1.0,
+                    1.0, 0.812, 0.812, 1.0,
+                    1.0, 0.812, 0.812, 1.0,
 
-                        1.0, 0.302 + i*0.102, 0.302 + i*0.102, 1.0,
-                        1.0, 0.302 + i*0.102, 0.302 + i*0.102, 1.0,
-                    ])
-                }
-
-                colors = colors.concat([
                     1.0, 0.2, 0.2, 1.0,
                     1.0, 0.455, 0.455, 1.0,
                     1.0, 0.608, 0.608, 1.0,
-                    1.0, 0.761, 0.761, 1.0,
-                ])
+                    1.0, 0.455, 0.455, 1.0,
+                    1.0, 0.608, 0.608, 1.0,
+                    1.0, 0.812, 0.812, 1.0,
 
-                for (var i = 0; i < 6; i++){
-                    colors = colors.concat([
-                        1.0, 0.2 + i*0.102, 0.2 + i*0.102, 1.0,
-                        1.0, 0.302 + i*0.102, 0.302 + i*0.102, 1.0,
+                    1.0, 0.2, 0.2, 1.0,
+                    1.0, 0.2, 0.2, 1.0,
+                    1.0, 0.812, 0.812, 1.0,
+                    1.0, 0.2, 0.2, 1.0,
+                    1.0, 0.812, 0.812, 1.0,
+                    1.0, 0.812, 0.812, 1.0, 
 
-                        1.0, 0.2 + i*0.102, 0.2 + i*0.102, 1.0,
-                        1.0, 0.302 + i*0.102, 0.302 + i*0.102, 1.0,
-                    ])
+
+                    //belakang
+                    1.0, 0.2, 0.2, 1.0,
+                    1.0, 0.2, 0.2, 1.0,
+                    1.0, 0.812, 0.812, 1.0,
+                    1.0, 0.2, 0.2, 1.0,
+                    1.0, 0.812, 0.812, 1.0,
+                    1.0, 0.812, 0.812, 1.0,
+
+                    1.0, 0.2, 0.2, 1.0,
+                    1.0, 0.455, 0.455, 1.0,
+                    1.0, 0.608, 0.608, 1.0,
+                    1.0, 0.455, 0.455, 1.0,
+                    1.0, 0.608, 0.608, 1.0,
+                    1.0, 0.812, 0.812, 1.0,
+
+                    1.0, 0.2, 0.2, 1.0,
+                    1.0, 0.2, 0.2, 1.0,
+                    1.0, 0.812, 0.812, 1.0,
+                    1.0, 0.2, 0.2, 1.0,
+                    1.0, 0.812, 0.812, 1.0,
+                    1.0, 0.812, 0.812, 1.0,            
+                ]
+                
+                //atas
+                for (var i = 0; i < 72; i++){
+                    colors = colors.concat([0.5, 0.5, 0.5, 1.0,])
                 }
-
-
 
                 gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(colors), gl.STATIC_DRAW)
                 nVertexColorBuffer.itemSize = 4
-                nVertexColorBuffer.numItems = 52
+                nVertexColorBuffer.numItems = colors.length/4
             }
             var rl = 0
             var rn = 0
@@ -301,7 +440,7 @@
                 gl.vertexAttribPointer(shaderProgram.vertexColorAttribute, lVertexColorBuffer.itemSize,
                 gl.FLOAT, false, 0, 0)
                 setMatrixUniform()
-                gl.drawArrays(gl.TRIANGLE_STRIP, 0, lVertexPositionBuffer.numItems)
+                gl.drawArrays(gl.TRIANGLES, 0, lVertexPositionBuffer.numItems)
                 mvPopMatrix()
 
                 mat4.translate(mvMatrix, mvMatrix, [0.0, -4.0, 0.0])
@@ -314,7 +453,7 @@
                 gl.vertexAttribPointer(shaderProgram.vertexColorAttribute, nVertexColorBuffer.itemSize,
                 gl.FLOAT, false, 0, 0)
                 setMatrixUniform()
-                gl.drawArrays(gl.TRIANGLE_STRIP, 0, nVertexPositionBuffer.numItems)
+                gl.drawArrays(gl.TRIANGLES, 0, nVertexPositionBuffer.numItems)
                 mvPopMatrix()
             }
             var lastTime = 0
